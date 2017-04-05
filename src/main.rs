@@ -1,40 +1,38 @@
 extern crate iron;
 extern crate router;
+#[macro_use]
 extern crate diesel;
+#[macro_use]
+extern crate diesel_codegen;
 extern crate r2d2;
 extern crate r2d2_diesel;
 extern crate dotenv;
+extern crate chrono;
+#[macro_use]
+extern crate serde_derive;
+extern crate serde_json;
 
-use iron::prelude::*;
-use iron::status;
-use router::Router;
+mod db;
+mod endpoints;
+mod test_controller;
+mod user_controller;
+mod db_schema;
+mod user_model;
 
-use diesel::pg::PgConnection;
-use r2d2_diesel::ConnectionManager;
+use iron::prelude::Iron;
 use dotenv::dotenv;
-use std::env;
+
+use db::Db;
+use endpoints::declare_endpoints;
 
 fn main() {
 	dotenv().ok();
-	let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
 
-	let config = r2d2::Config::default();
-	let manager = ConnectionManager::<PgConnection>::new(database_url);
-	let pool = r2d2::Pool::new(config, manager).expect("Failed to create diesel pool.");
+	let db = Db::new();
+	let db_connection_pool = db.get_pool();
+	let router = declare_endpoints(db_connection_pool);
 
-	let mut router = Router::new();
-	
-	router.get("/:query", move |req: &mut Request| -> IronResult<Response> {
-		let connection = pool.get();
-		
-		let ref query = req.extensions.get::<Router>().unwrap().find("query").unwrap_or("/");
-		
-		println!("{:?}", req);
-		
-		//Ok(Response::with((status::Ok, *query)))
-		
-		Ok(Response::with((status::Ok, connection.is_ok().to_string())))
-	}, "query");
+	println!("Server running in localhost:3000");
 
 	Iron::new(router).http("localhost:3000").unwrap();
 }
