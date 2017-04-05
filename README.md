@@ -10,7 +10,7 @@ This code use macros in several places, use `cargo expand` (`cargo install cargo
 
 ## Dependencies
 
-- cargo
+- rust and cargo (Install using [https://www.rustup.rs/](https://www.rustup.rs/))
 - diesel-cli - Install: `cargo install diesel_cli`
 - PostgreSQL
 
