@@ -28,3 +28,19 @@ pub fn get_user(req: &mut Request, connection: DbPooledConnection) -> IronResult
 		response_data
 	)))
 }
+
+pub fn create_user(req: &mut Request, connection: DbPooledConnection) -> IronResult<Response> {
+    unimplemented!();
+}
+
+pub fn delete_user(req: &mut Request, connection: DbPooledConnection) -> IronResult<Response> {
+    unimplemented!();
+}
+
+pub fn update_user(req: &mut Request, connection: DbPooledConnection) -> IronResult<Response> {
+    unimplemented!();
+}
+
+pub fn get_all_users(req: &mut Request, connection: DbPooledConnection) -> IronResult<Response> {
+    unimplemented!();
+}

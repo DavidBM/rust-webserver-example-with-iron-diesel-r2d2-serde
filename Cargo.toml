@@ -17,3 +17,7 @@ serde_json = "^0.9"
 
 [dependencies.iron]
 version = "*"
+
+[dependencies.mount]
+
+git = "https://github.com/iron/mount.git"

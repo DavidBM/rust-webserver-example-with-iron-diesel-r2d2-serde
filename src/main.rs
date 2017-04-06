@@ -1,5 +1,6 @@
 extern crate iron;
 extern crate router;
+extern crate mount;
 #[macro_use]
 extern crate diesel;
 #[macro_use]
