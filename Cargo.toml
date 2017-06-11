@@ -1,5 +1,5 @@
 [package]
-name = "rust-webserver-demo"
+name = "backend-example"
 version = "0.1.0"
 authors = ["David Bonet <webbonet@gmail.com>"]
 
@@ -10,14 +10,24 @@ diesel = { version = "^0.12.0", features = ["postgres", "chrono"] }
 diesel_codegen = { version = "^0.12.0", features = ["postgres"] }
 dotenv = "^0.8.0"
 router = "*"
-chrono = { version = "^0.3", features = ["serde"] }
+chrono = { version = "^0.3", features = ["serde", "rustc-serialize"] }
 serde = "^0.9"
 serde_derive = "^0.9"
 serde_json = "^0.9"
+slog = "~2.0.0-3.1"
+slog-term = "~2.0.0-3.0"
+slog-json = "~2.0.0-3.0"
+jsonwebtoken = "^1"      # Keep an eye for updates. They are developing a better API
+iron-cors = {git = "https://github.com/DavidBM/iron-cors-rs"} # Use the official one when the author update the crate with the pull request 
+argon2rs = "^0.2.5"      # Keep an eye for updates. They wil update default values for security (now in 3 passes and 1 lane)
+base64 = "~0.4.0"        # Keep an eye for updates.
+rustc-serialize = "^0.3" # Delete when jsonwebtoken is updated
 
 [dependencies.iron]
 version = "*"
 
 [dependencies.mount]
-
 git = "https://github.com/iron/mount.git"
+
+[dependencies.bodyparser]
+git = "https://github.com/iron/body-parser.git"

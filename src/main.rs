@@ -9,31 +9,42 @@ extern crate r2d2;
 extern crate r2d2_diesel;
 extern crate dotenv;
 extern crate chrono;
+extern crate serde;
 #[macro_use]
 extern crate serde_derive;
+#[macro_use]
 extern crate serde_json;
+#[macro_use]
+extern crate slog;
+extern crate slog_term;
+extern crate slog_json;
+extern crate iron_cors;
+extern crate jsonwebtoken as jwt;
+extern crate rustc_serialize;
+extern crate argon2rs;
+extern crate base64;
 
-mod db;
-mod endpoints;
-mod test_controller;
-mod user_controller;
-mod db_schema;
-mod user_model;
+#[macro_use]
+mod utils;
+mod dal;
+mod controllers;
+mod http_adaptor;
+mod middlewares;
 
-use iron::prelude::Iron;
 use dotenv::dotenv;
-
-use db::Db;
-use endpoints::declare_endpoints;
+use http_adaptor::HttpAdaptor;
+use utils::logger_factory;
 
 fn main() {
 	dotenv().ok();
 
-	let db = Db::new();
-	let db_connection_pool = db.get_pool();
-	let router = declare_endpoints(db_connection_pool);
+	let logger = logger_factory();
 
-	println!("Server running in localhost:3000");
+	let mut http_server = HttpAdaptor::new(&logger);
 
-	Iron::new(router).http("localhost:3000").unwrap();
+	let routes = http_server.declare_endpoints();
+	let chain = http_server.create_chain(routes);
+
+
+	http_server.start_http(chain, "localhost", "3000");
 }
