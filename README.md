@@ -1,4 +1,4 @@
-# Templic backend
+# Rust webserver example backend
 
 <!-- MarkdownTOC autolink=true autoanchor=true bracket=round depth=0 -->
 
