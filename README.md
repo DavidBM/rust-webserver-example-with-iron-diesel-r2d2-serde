@@ -53,7 +53,7 @@ Compiled using Rust `rustc 1.16.0 (30cf806ef 2017-03-10)` stable version.
 <a name="before-run"></a>
 ## Before run
 
-- Enter in the git folder `cd templic-backend`
+- Enter in the git folder
 - Update the database connection data in the file `.env`
 - `diesel migration run`
 
