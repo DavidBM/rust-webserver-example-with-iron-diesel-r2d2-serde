@@ -15,6 +15,8 @@
 
 <!-- /MarkdownTOC -->
 
+#### I evolved a bit the ideas here, maybe you want to watch this project instead of this one: https://github.com/DavidBM/templic-backend
+
 Example of how to build a http json backend in rust. The code is split in controllers/models. For more complexity new abastraction shluld be created. 
 
 Main components:
