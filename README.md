@@ -1,3 +1,6 @@
+## This is quite old and Iron framework is deprecated. You may be better using something like https://rocket.rs/ or https://github.com/http-rs/tide. For the DB, diesel is still the way to go (it is not async yet, but very feature complete.)
+
+
 # Rust webserver example backend
 
 <!-- MarkdownTOC autolink=true autoanchor=true bracket=round depth=0 -->
